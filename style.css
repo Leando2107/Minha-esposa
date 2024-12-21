@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #111; /* Fundo escuro para destacar o carrossel */
+    color: #d820f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    position: relative; /* Necessário para posicionar as partículas da chuva */
+    overflow: hidden; /* Impede que as partículas saiam da tela */
+}
+
+/* Estilo do carrossel */
+.carousel {
+    position: relative;
+    width: 600px; /* Largura do carrossel */
+    height: 600px; /* Altura fixa do carrossel */
+    overflow: hidden; /* Oculta as partes fora do carrossel */
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1; /* Coloca o carrossel atrás da chuva de corações */
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Animação suave ao passar imagens */
+}
+
+.carousel-item {
+    flex-shrink: 0; /* Garante que as imagens não encolham */
+    width: 100%; /* Largura igual ao contêiner */
+    height: 100%; /* Altura igual ao contêiner */
+    object-fit: contain; /* Mostra a imagem inteira sem cortes */
+    background-color: black; /* Fundo preto para áreas vazias */
+    border-radius: 10px; /* Deixa as bordas arredondadas */
+}
+
+/* Botões de navegação */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 2; /* Coloca os botões acima do carrossel, mas abaixo da chuva */
+    font-size: 18px;
+    border-radius: 50%;
+    outline: none;
+}
+
+.carousel-button.prev {
+    left: 10px; /* Botão anterior à esquerda */
+}
+
+.carousel-button.next {
+    right: 10px; /* Botão próximo à direita */
+}
+
+.carousel-button:hover {
+    background: rgba(255, 255, 255, 0.7);
+    color: black;
+}
+
+/* Estilo para o botão de chamada para ação (CTA) */
+.cta-button {
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #ff4081;
+    color:rgb(255, 255, 255);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Espaçamento entre o carrossel e o botão */
+}
+
+.cta-button:hover {
+    background-color: #e64a19;
+}
+
+/* Centraliza o botão CTA abaixo do carrossel */
+.cta-button-container {
+    position: absolute;
+    bottom: 10px; /* Distância do fundo */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza horizontalmente */
+}
+
+/* Efeito de chuva de corações */
+@keyframes rain {
+    0% {
+        transform: translateY(-100px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+.heart {
+    position: absolute;
+    top: -50px;
+    font-size: 25px;
+    color: #ff4081;
+    opacity: 0;
+    animation: rain 5s linear infinite;
+    z-index: 3; /* Coloca as partículas acima de tudo */
+    pointer-events: none;
+}
+
+.heart:nth-child(odd) {
+    animation-duration: 4s;
+}
+
+.heart:nth-child(even) {
+    animation-duration: 6s;
+}
+
+/* Ajusta o número de partículas */
+.heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+.heart:nth-child(2) { left: 20%; animation-delay: 1s; }
+.heart:nth-child(3) { left: 30%; animation-delay: 2s; }
+.heart:nth-child(4) { left: 40%; animation-delay: 3s; }
+.heart:nth-child(5) { left: 50%; animation-delay: 4s; }
+.heart:nth-child(6) { left: 60%; animation-delay: 5s; }
+.heart:nth-child(7) { left: 70%; animation-delay: 6s; }
+.heart:nth-child(8) { left: 80%; animation-delay: 7s; }
+.heart:nth-child(9) { left: 90%; animation-delay: 8s; }
+
+/* Ajustes para o Samsung Galaxy A70 e telas menores */
+@media (max-width: 1080px) {
+    body {
+        font-size: 16px;
+    }
+
+    .carousel {
+        width: 80%;
+        height: 500px;
+        margin: 0 auto;
+    }
+
+    .carousel-header h1 {
+        font-size: 2rem;
+    }
+
+    .carousel-item {
+        object-fit: contain;
+    }
+
+    .cta-button {
+        font-size: 16px;
+        padding: 12px 25px;
+    }
+
+    .heart {
+        font-size: 25px;
+        animation-duration: 5s;
+    }
+
+    .cta-button-container {
+        bottom: 15px;
+    }
+}
